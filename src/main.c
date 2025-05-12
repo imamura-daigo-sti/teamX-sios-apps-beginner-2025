@@ -8,7 +8,7 @@ struct Item {
 };
 
 // 合計金額を表示する関数
-void total(int totalAmount) {
+void payment(int totalAmount) {
     printf("\n最終的な合計金額は %d 円です。\n", totalAmount);
 }
 
@@ -70,7 +70,7 @@ int main() {
     }
 
     // 合計金額を表示
-    total(totalPrice);
+    payment(totalPrice);
 
     return 0;
 }
