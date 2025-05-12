@@ -44,7 +44,7 @@ void payment(int totalAmount) {
             printf("%d円: %d枚\n", coins[i], coin_count[i]);
         }
     }
-
+    return(0);
 }
 
 void Logoutput(const char *message) {
