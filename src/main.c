@@ -44,6 +44,49 @@ void payment(int totalAmount) {
             printf("%d円: %d枚\n", coins[i], coin_count[i]);
         }
     }
+
+}
+
+void Logoutput(const char *message) {
+    FILE *Logfile = fopen("log.txt", "a");
+    if (Logfile == NULL) {
+        printf("logfileのオープンに失敗しました。\n");
+        return;
+    }
+    fprintf(Logfile, "%s\n", message);
+    fclose(Logfile);
+}
+
+void Pointcardfunction(double totalAmount) {
+    char status[10];
+    printf("ポイントカードをお持ちですか？ (はい/いいえ): ");
+    scanf("%s", status);
+
+    if (strcmp(status, "はい") == 0) {
+        int point = (int)(totalAmount * 0.01);
+        printf("ポイントが %d ポイント付与されました。\n", point);
+
+        // Logoutput
+        char log[100];
+        sprintf(log, "ポイント付与: %d ポイント", point);
+        Logoutput(log);
+    } else if (strcmp(status, "いいえ") == 0) {
+        char telephone[20];
+        char name[50];
+        printf("ポイントカードを作成します。\n");
+        printf("電話番号を入力してください: ");
+        scanf("%s", telephone);
+        printf("名前を入力してください: ");
+        scanf("%s", name);
+        printf("ポイントカードが作成されました。名前: %s, 電話番号: %s\n", name, telephone);
+
+        // Logoutput
+        char log[100];
+        sprintf(log, "ポイントカード作成: 名前=%s, 電話番号=%s", name, telephone);
+        Logoutput(log);
+    } else {
+        printf("無効な入力です。処理を終了します。\n");
+    }
 }
 
 int main() {
@@ -104,7 +147,10 @@ int main() {
     }
 
     // 合計金額を表示
-    payment(totalPrice);
+    total(totalPrice);
+
+    // ポイントカード機能を呼び出す
+    Pointcardfunction(totalPrice);
 
     return 0;
 }
