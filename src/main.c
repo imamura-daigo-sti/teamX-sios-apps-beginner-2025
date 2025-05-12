@@ -7,9 +7,43 @@ struct Item {
     int stock;
 };
 
-// 合計金額を表示する関数
+// 支払関係
 void payment(int totalAmount) {
-    printf("\n最終的な合計金額は %d 円です。\n", totalAmount);
+    //printf("\n最終的な合計金額は %d 円です。\n", totalAmount);
+    int payment, change;
+    int coins[] = {10000,5000,1000,500, 100, 50, 10, 5, 1}; // 使用する貨幣の種類
+    int coin_count[9] = {0}; // 各貨幣の枚数を記録
+
+    // 支払金額の入力
+    printf("合計金額: %d円\n", totalAmount);
+    printf("支払金額を入力してください: ");
+    scanf("%d", &payment);
+
+    // 支払金額が不足している場合の処理
+    while (payment < totalAmount) {
+        printf("支払金額が不足しています。再度入力してください: ");
+        scanf("%d", &payment);
+    }
+
+    // お釣りの計算
+    change = payment - totalAmount;
+    printf("お釣り: %d円\n", change);
+
+    // 最小の貨幣枚数を計算
+    for (int i = 0; i < 9; i++) {
+        if (change >= coins[i]) {
+            coin_count[i] = change / coins[i];
+            change %= coins[i];
+        }
+    }
+
+    // 結果の表示
+    printf("お釣りの最小貨幣枚数:\n");
+    for (int i = 0; i < 6; i++) {
+        if (coin_count[i] > 0) {
+            printf("%d円: %d枚\n", coins[i], coin_count[i]);
+        }
+    }
 }
 
 int main() {
