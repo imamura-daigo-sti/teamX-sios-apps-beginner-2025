@@ -7,6 +7,12 @@ struct Item {
     int stock;
 };
 
+int total(int x) {
+    
+
+    return 0;
+}
+
 int main() {
     struct Item items[] = {
         {"りんご", 100, 10},
@@ -55,33 +61,6 @@ int main() {
     if (!found) {
         printf("\n指定された商品は見つかりませんでした。\n");
     }
-
-    return 0;
-}
-#include <stdio.h>
-
-// 合計金額を表示する関数
-void total(int totalAmount) {
-    printf("合計金額は %d 円です。\n", totalAmount);
-}
-
-int main() {
-    int amount = 1500; // 例として合計金額を設定
-
-    // 合計金額を表示
-    total(amount);
-
-    return 0;
-}
-#include <stdio.h>
-
-// 合計金額を表示する関数
-void total(int totalAmount) {
-    printf("合計金額は %d 円です。\n", totalAmount);
-}
-
-int total(int x) {
-    
 
     return 0;
 }
