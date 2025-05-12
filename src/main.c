@@ -147,7 +147,7 @@ int main() {
     }
 
     // 合計金額を表示
-   // total(totalPrice);
+    payment(totalPrice);
 
     // ポイントカード機能を呼び出す
     Pointcardfunction(totalPrice);
