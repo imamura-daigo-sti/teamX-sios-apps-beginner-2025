@@ -7,10 +7,9 @@ struct Item {
     int stock;
 };
 
-int total(int x) {
-    
-
-    return 0;
+// 合計金額を表示する関数
+void total(int totalAmount) {
+    printf("\n最終的な合計金額は %d 円です。\n", totalAmount);
 }
 
 int main() {
@@ -26,7 +25,7 @@ int main() {
     int itemCount = sizeof(items) / sizeof(items[0]);
     char orderName[10];
     int orderQuantity;
-    int found = 0; // 商品が見つかったかどうかを判定するフラグ
+    int found;
     int totalPrice = 0;
 
     printf("お会計システム作成\n");
@@ -36,31 +35,42 @@ int main() {
         printf("商品名: %s, 在庫数: %d\n", items[i].name, items[i].stock);
     }
 
-    printf("\n注文する商品名を入力してください: ");
-    scanf("%s", orderName);
+    while (1) {
+        printf("\n注文する商品名を入力してください（終了するには「終了」と入力）: ");
+        scanf("%s", orderName);
 
-    printf("注文する数量を入力してください: ");
-    scanf("%d", &orderQuantity);
- 
-
-    for (int i = 0; i < itemCount; i++) {
-        if (strcmp(items[i].name, orderName) == 0) {
-            found = 1;
-            if (orderQuantity <= items[i].stock) {
-                totalPrice = items[i].price * orderQuantity;
-                items[i].stock -= orderQuantity; // 在庫を減らす
-                printf("\n注文内容:\n");
-                printf("商品名: %s, 数量: %d, 合計金額: %d円\n", items[i].name, orderQuantity, totalPrice);
-            } else {
-                printf("\n在庫が不足しています。\n");
-            }
+        if (strcmp(orderName, "終了") == 0) {
             break;
+        }
+
+        printf("注文する数量を入力してください: ");
+        scanf("%d", &orderQuantity);
+
+        found = 0; // 商品が見つかったかどうかをリセット
+
+        for (int i = 0; i < itemCount; i++) {
+            if (strcmp(items[i].name, orderName) == 0) {
+                found = 1;
+                if (orderQuantity <= items[i].stock) {
+                    int currentTotal = items[i].price * orderQuantity;
+                    totalPrice += currentTotal;
+                    items[i].stock -= orderQuantity; // 在庫を減らす
+                    printf("\n注文内容:\n");
+                    printf("商品名: %s, 数量: %d, 小計: %d円\n", items[i].name, orderQuantity, currentTotal);
+                } else {
+                    printf("\n在庫が不足しています。\n");
+                }
+                break;
+            }
+        }
+
+        if (!found) {
+            printf("\n指定された商品は見つかりませんでした。\n");
         }
     }
 
-    if (!found) {
-        printf("\n指定された商品は見つかりませんでした。\n");
-    }
+    // 合計金額を表示
+    total(totalPrice);
 
     return 0;
 }
