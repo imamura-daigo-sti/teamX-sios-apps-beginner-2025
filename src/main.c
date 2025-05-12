@@ -44,7 +44,7 @@ void payment(int totalAmount) {
             printf("%d円: %d枚\n", coins[i], coin_count[i]);
         }
     }
-
+    return(0);
 }
 
 void Logoutput(const char *message) {
@@ -71,8 +71,8 @@ void Pointcardfunction(double totalAmount) {
         sprintf(log, "ポイント付与: %d ポイント", point);
         Logoutput(log);
     } else if (strcmp(status, "いいえ") == 0) {
-        char telephone[20];
-        char name[50];
+        char telephone[100];
+        char name[100];
         printf("ポイントカードを作成します。\n");
         printf("電話番号を入力してください: ");
         scanf("%s", telephone);
@@ -147,7 +147,7 @@ int main() {
     }
 
     // 合計金額を表示
-    total(totalPrice);
+   // total(totalPrice);
 
     // ポイントカード機能を呼び出す
     Pointcardfunction(totalPrice);
